@@ -13,13 +13,13 @@ embedding:
 # --- チャンク化（テキスト分割）設定 ---
 chunking:
   # RAGの精度に最も影響するパラメータ
-  chunk_size: 250
-  chunk_overlap: 30
+  chunk_size: 1000
+  chunk_overlap: 100
 
 # --- 回答生成（Generation）設定 ---
 generation:
   # ここを true にするとローカルLLM、false にするとGemini APIを使用
-  use_local_llm: true
+  use_local_llm: false
 
   # Gemini APIを使用する場合の設定
   api:
