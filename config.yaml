@@ -27,5 +27,4 @@ generation:
 
   # ローカルLLMを使用する場合の設定
   local:
-    # 認証不要で比較的高性能なモデル
     model_name: "google/gemma-7b-it"
