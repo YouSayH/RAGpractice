@@ -6,25 +6,30 @@ database:
 
 # --- ベクトル化（Embedding）設定 ---
 embedding:
-  # 検索精度に影響。日本語特化モデルなどに変更可能
-  # 例: 'sonoisa/sentence-bert-base-ja-cased-v2'
   model_name: 'intfloat/multilingual-e5-large'
 
 # --- チャンク化（テキスト分割）設定 ---
+# build_database.py で使用
 chunking:
-  # RAGの精度に最も影響するパラメータ
   chunk_size: 1000
-  chunk_overlap: 100
+  chunk_overlap: 200
 
 # --- 回答生成（Generation）設定 ---
 generation:
-  # ここを true にするとローカルLLM、false にするとGemini APIを使用
-  use_local_llm: false
+  # ここで 'gemini', 'huggingface', 'lmstudio' のいずれかを選択
+  provider: 'gemini' 
 
-  # Gemini APIを使用する場合の設定
-  api:
+  # --- 各プロバイダーの詳細設定 ---
+  # ① Gemini APIを使用する場合
+  gemini:
     model_name: 'gemini-2.5-flash'
 
-  # ローカルLLMを使用する場合の設定
-  local:
-    model_name: "google/gemma-7b-it"
+  # ② Hugging Faceのモデルを直接実行する場合
+  huggingface:
+    model_name: "google/gemma-1.1-7b-it" # Hugging Face上のモデルID  google/gemma-7b-it
+  
+  # ③ LM Studioのローカルサーバー経由で使用する場合
+  lmstudio:
+    base_url: "http://localhost:1234/v1" # LM Studioのサーバーアドレス
+    model: "local-model" # LM Studio側でロードしているモデル（固定値でOK）
+    api_key: "not-needed" # APIキー（不要）
